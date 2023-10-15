@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4iptcilgcmoh"]
+
+[ext_resource type="Script" path="res://scenes/interactive/toggle_block/toggle_block.gd" id="1_vlofc"]
+[ext_resource type="Texture2D" uid="uid://d16bn2u1ot46m" path="res://assets/destructible-block.png" id="2_swswe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsxy8"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oeutg"]
+polygon = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
+
+[node name="ToggleBlock" type="Node2D"]
+script = ExtResource("1_vlofc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_swswe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_fsxy8")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_oeutg")

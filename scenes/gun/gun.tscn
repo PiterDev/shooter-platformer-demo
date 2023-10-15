@@ -1,0 +1,179 @@
+[gd_scene load_steps=13 format=3 uid="uid://b3kp5mk4a53t5"]
+
+[ext_resource type="Texture2D" uid="uid://dd6w04wspocos" path="res://assets/gun.png" id="1_x22rn"]
+[ext_resource type="Script" path="res://scenes/gun/gun.gd" id="2_0k1r3"]
+[ext_resource type="Texture2D" uid="uid://bnf0rnv7rju6u" path="res://assets/load.png" id="3_0vckq"]
+[ext_resource type="AudioStream" uid="uid://cam3ibhrtbr1u" path="res://sounds/reload2.wav" id="3_sk48t"]
+[ext_resource type="Script" path="res://scenes/gun/reload_sprite.gd" id="4_6whpf"]
+
+[sub_resource type="Animation" id="Animation_77kii"]
+resource_name = "reload"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -1.39626, -1.39626, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.9, 0.95, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(3, 3, 3, 1), Color(3, 3, 3, 1), Color(5, 5, 5, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-20.1513, -4.25496), Vector2(-30.151, -4.255), Vector2(-30.151, -4.255), Vector2(-20.1513, -4.25496)]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_sk48t")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_sk48t")
+}],
+"times": PackedFloat32Array(-0.05, 0.5)
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:pitch_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 5.0]
+}
+
+[sub_resource type="Animation" id="Animation_t578t"]
+resource_name = "shoot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(24, 8), Vector2(22, 8), Vector2(24, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vqmqq"]
+_data = {
+"reload": SubResource("Animation_77kii"),
+"shoot": SubResource("Animation_t578t")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4alt"]
+atlas = ExtResource("3_0vckq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g27ej"]
+atlas = ExtResource("3_0vckq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se14v"]
+atlas = ExtResource("3_0vckq")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1kpf1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_i4alt")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_g27ej")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_se14v")
+}],
+"loop": true,
+"name": &"load",
+"speed": 5.0
+}]
+
+[node name="Gun" type="Sprite2D"]
+z_index = 10
+position = Vector2(14, 8)
+texture = ExtResource("1_x22rn")
+offset = Vector2(-20.1513, -4.25496)
+script = ExtResource("2_0k1r3")
+recoil_strength = 900.0
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(13, -3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vqmqq")
+}
+
+[node name="ReloadSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(4, -9)
+sprite_frames = SubResource("SpriteFrames_1kpf1")
+animation = &"load"
+frame_progress = 0.790809
+script = ExtResource("4_6whpf")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+pitch_scale = 5.0
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

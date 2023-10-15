@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbrmxd528agd"]
+
+[ext_resource type="Texture2D" uid="uid://cploml6hjb1pg" path="res://assets/jump_pad.png" id="1_o2xye"]
+[ext_resource type="Script" path="res://scenes/interactive/jump_pad/jump_pad.gd" id="1_sa26l"]
+[ext_resource type="Texture2D" uid="uid://hrtl5snguwqf" path="res://assets/light_texture.webp" id="3_ynd4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhnyq"]
+size = Vector2(4, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gwke"]
+size = Vector2(20, 2)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_txms8"]
+polygon = PackedVector2Array(14, 7.5, 16, 8, 16, 16, -16, 16, -16, 8, -14, 8, -14, 6, 14, 6)
+
+[node name="JumpPad" type="AnimatableBody2D"]
+script = ExtResource("1_sa26l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1.06581e-14, 14)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_xhnyq")
+
+[node name="JumpPad" type="Sprite2D" parent="."]
+texture = ExtResource("1_o2xye")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_4gwke")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 11)
+color = Color(0.690196, 0, 0.690196, 1)
+energy = 0.3
+shadow_enabled = true
+texture = ExtResource("3_ynd4s")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_txms8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://lv5uoeppgruf"]
+
+[ext_resource type="FontFile" uid="uid://bqu27eylfjwn" path="res://fonts/PressStart2P-Regular.ttf" id="1_vsc1m"]
+
+[resource]
+default_font = ExtResource("1_vsc1m")
+Label/fonts/font = ExtResource("1_vsc1m")

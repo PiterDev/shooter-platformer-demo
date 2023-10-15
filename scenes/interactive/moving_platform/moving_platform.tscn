@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dve01kqp13jdh"]
+
+[ext_resource type="Texture2D" uid="uid://w4agcres3yo1" path="res://assets/tileset.png" id="1_8u43l"]
+[ext_resource type="Script" path="res://scenes/interactive/moving_platform/moving_platform.gd" id="1_65vcj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yhls"]
+size = Vector2(128, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vmei5"]
+polygon = PackedVector2Array(0, 0, 128, 0, 128, 32, 0, 32)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_65vcj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64, 16)
+shape = SubResource("RectangleShape2D_3yhls")
+
+[node name="Tileset" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+texture = ExtResource("1_8u43l")
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 32)
+
+[node name="Tileset2" type="Sprite2D" parent="."]
+position = Vector2(48, 16)
+texture = ExtResource("1_8u43l")
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 32)
+
+[node name="Tileset3" type="Sprite2D" parent="."]
+position = Vector2(80, 16)
+texture = ExtResource("1_8u43l")
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 32)
+
+[node name="Tileset4" type="Sprite2D" parent="."]
+position = Vector2(112, 16)
+texture = ExtResource("1_8u43l")
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 32)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_vmei5")

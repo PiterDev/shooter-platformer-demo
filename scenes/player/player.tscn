@@ -1,0 +1,259 @@
+[gd_scene load_steps=22 format=3 uid="uid://cwinpuh6o5h46"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_3dguq"]
+[ext_resource type="Texture2D" uid="uid://cyc2232hlmrmt" path="res://assets/player.png" id="1_wq2yy"]
+[ext_resource type="Script" path="res://scenes/player/sprite_animations.gd" id="3_3i4qt"]
+[ext_resource type="Script" path="res://scenes/player/trail.gd" id="3_8epjm"]
+[ext_resource type="Script" path="res://scenes/player/hand.gd" id="5_now1s"]
+[ext_resource type="PackedScene" uid="uid://b3kp5mk4a53t5" path="res://scenes/gun/gun.tscn" id="6_i1bp6"]
+[ext_resource type="Theme" uid="uid://lv5uoeppgruf" path="res://theme.tres" id="7_l801t"]
+[ext_resource type="Script" path="res://scenes/player/speech_bubble.gd" id="8_13sb7"]
+[ext_resource type="Texture2D" uid="uid://hrtl5snguwqf" path="res://assets/light_texture.webp" id="9_ojsx6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plgh3"]
+size = Vector2(24, 56)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vamc4"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_fy6w3"]
+max_value = 0.5
+_data = [Vector2(0, 0), 0.0, 0.732997, 0, 0, Vector2(0.385852, 0.163636), -0.471212, -0.471212, 0, 0, Vector2(0.909968, 0.409091), 0.100974, 0.100974, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_sqi2h"]
+offsets = PackedFloat32Array(0, 0.294776, 0.813433, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.929412, 0.847059, 0.741176, 1, 0.929412, 0.847059, 0.741176, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_kyqru"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_ul5lm"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.063), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_aonhr"]
+resource_name = "jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.9), Vector2(1, 0.8), Vector2(0.9, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1dds0"]
+resource_name = "run_left"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.0523599, -0.0872665, -0.0523599, -0.0698132]
+}
+
+[sub_resource type="Animation" id="Animation_2vios"]
+resource_name = "run_right"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0523599, 0.0872665, 0.0523599, 0.0698132]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p4hxn"]
+_data = {
+"RESET": SubResource("Animation_kyqru"),
+"idle": SubResource("Animation_ul5lm"),
+"jump": SubResource("Animation_aonhr"),
+"run_left": SubResource("Animation_1dds0"),
+"run_right": SubResource("Animation_2vios")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ctcn6"]
+font_color = Color(0.576471, 0.368627, 0.568627, 1)
+outline_size = 4
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5ns12"]
+polygon = PackedVector2Array(-12, -14, -8, -14, -8, -18, 8, -18, 8, -14, 12, -14, 12, -2, 8, -2, 8, 2, 12, 2, 12, 18, 8, 18, 8, 34, 4, 34, 4, 22, -4, 22, -4, 34, -8, 34, -8, 18, -12, 18, -12, 2, -8, 2, -8, -2, -12, -2)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_3dguq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = ExtResource("1_wq2yy")
+script = ExtResource("3_3i4qt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_vertical_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_plgh3")
+
+[node name="Trail" type="Line2D" parent="."]
+modulate = Color(10, 10, 10, 1)
+z_index = -1
+material = SubResource("CanvasItemMaterial_vamc4")
+position = Vector2(-1, 6)
+points = PackedVector2Array(-52, 4, -21, 5, -4, -1, 10, -13)
+width = 25.0
+width_curve = SubResource("Curve_fy6w3")
+gradient = SubResource("Gradient_sqi2h")
+script = ExtResource("3_8epjm")
+
+[node name="JumpIndicator" type="Line2D" parent="."]
+visible = false
+position = Vector2(0, 28)
+points = PackedVector2Array(-12, 0, 12, 0)
+width = 10.491
+default_color = Color(0.992157, 0.537255, 0.701961, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p4hxn")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+amount = 32
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = 45.86
+angular_velocity_max = 720.0
+
+[node name="Hand" type="Node2D" parent="."]
+script = ExtResource("5_now1s")
+
+[node name="Gun" parent="Hand" instance=ExtResource("6_i1bp6")]
+position = Vector2(23, 8)
+
+[node name="SpeechBubble" type="Label" parent="."]
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -48.0
+offset_right = 43.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_l801t")
+text = "hello there"
+label_settings = SubResource("LabelSettings_ctcn6")
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+script = ExtResource("8_13sb7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_5ns12")
+occluder_light_mask = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.552941, 0.588235, 0.772549, 1)
+energy = 0.7
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("9_ojsx6")
+texture_scale = 3.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, -48)
+color = Color(0.658824, 0.376471, 0.815686, 1)
+energy = 0.3
+texture = ExtResource("9_ojsx6")
+texture_scale = 2.0
+
+[connection signal="jump" from="." to="Sprite" method="_on_player_jump"]
+[connection signal="shoot" from="Hand/Gun" to="." method="_on_gun_shoot"]

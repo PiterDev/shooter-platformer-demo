@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2ny30uu5003f"]
+
+[ext_resource type="Texture2D" uid="uid://dexik58sv5pnp" path="res://assets/target.png" id="1_r7wbh"]
+[ext_resource type="Script" path="res://scenes/interactive/shoot_target/shoot_target.gd" id="1_swcn2"]
+[ext_resource type="Texture2D" uid="uid://hrtl5snguwqf" path="res://assets/light_texture.webp" id="3_nkvqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djwcv"]
+size = Vector2(22, 16)
+
+[node name="Target" type="Node2D"]
+script = ExtResource("1_swcn2")
+
+[node name="Target" type="Sprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+rotation = 0.00111657
+texture = ExtResource("1_r7wbh")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_djwcv")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.690196, 0, 0.690196, 1)
+shadow_enabled = true
+texture = ExtResource("3_nkvqr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
